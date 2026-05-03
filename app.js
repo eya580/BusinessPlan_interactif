@@ -1806,51 +1806,34 @@ function exportPDF() {
             <div class="logo-header">
                 <svg width="100" height="100" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
                   <defs>
-                    <radialGradient id="copperGradient" cx="40%" cy="40%">
-                      <stop offset="0%" style="stop-color:#f4d5a8;stop-opacity:1" />
-                      <stop offset="50%" style="stop-color:#d4a574;stop-opacity:1" />
-                      <stop offset="100%" style="stop-color:#a87d3d;stop-opacity:1" />
-                    </radialGradient>
-                    <radialGradient id="innerCircle" cx="50%" cy="50%">
-                      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-                      <stop offset="100%" style="stop-color:#f5f5f5;stop-opacity:1" />
-                    </radialGradient>
-                    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" style="stop-color:#5b9fd8;stop-opacity:1" />
-                      <stop offset="100%" style="stop-color:#2c5aa0;stop-opacity:1" />
+                    <linearGradient id="copperGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#d4a574"/>
+                      <stop offset="100%" stop-color="#8b6f47"/>
                     </linearGradient>
+                    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#84c1ff"/>
+                      <stop offset="100%" stop-color="#1f5fc0"/>
+                    </linearGradient>
+                    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity="0.15"/>
+                    </filter>
                   </defs>
-                  <circle cx="100" cy="100" r="95" fill="url(#copperGradient)" stroke="#8b6f47" stroke-width="2"/>
-                  <circle cx="100" cy="100" r="85" fill="url(#innerCircle)"/>
-                  <g id="circuit-right">
-                    <path d="M 120 65 Q 135 60 140 75 L 140 90 Q 138 105 125 110" fill="none" stroke="url(#blueGradient)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M 125 70 Q 135 67 138 78 L 138 88 Q 137 98 128 103" fill="none" stroke="#5b9fd8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
-                    <path d="M 130 75 Q 133 73 135 80 L 135 86 Q 134 93 130 96" fill="none" stroke="#a8d5ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
-                    <circle cx="142" cy="73" r="3" fill="#2c5aa0"/>
-                    <circle cx="123" cy="108" r="3" fill="#2c5aa0"/>
+                  <circle cx="100" cy="100" r="96" fill="#f8fafc" stroke="#d1d5db" stroke-width="1"/>
+                  <circle cx="100" cy="100" r="82" fill="#ffffff"/>
+                  <g filter="url(#shadow)">
+                    <path d="M 42 100 C 42 55 72 40 92 40 L 132 40 C 158 40 168 62 168 96 L 168 104 C 168 138 158 160 132 160 L 92 160 C 72 160 42 145 42 100 Z" fill="none" stroke="url(#copperGrad)" stroke-width="16"/>
+                    <path d="M 69 99 C 69 84 77 78 86 78 H 115 C 124 78 132 84 132 99 V 101 C 132 116 124 122 115 122 H 86 C 77 122 69 116 69 101 Z" fill="url(#blueGrad)" opacity="0.95"/>
+                    <path d="M 76 99 C 76 88 82 84 86 84 H 115 C 119 84 125 88 125 99 V 101 C 125 112 119 116 115 116 H 86 C 82 116 76 112 76 101 Z" fill="#e2f2ff"/>
+                    <path d="M 85 95 L 115 95" stroke="#1f5fc0" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M 85 105 L 115 105" stroke="#1f5fc0" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="84" cy="95" r="3" fill="#1f5fc0"/>
+                    <circle cx="116" cy="105" r="3" fill="#1f5fc0"/>
+                    <path d="M 60 120 L 140 40" stroke="url(#copperGrad)" stroke-width="12" stroke-linecap="round"/>
+                    <polygon points="140,40 132,52 148,52" fill="url(#copperGrad)"/>
                   </g>
-                  <g id="circuit-left">
-                    <path d="M 80 135 Q 65 140 60 125 L 60 110 Q 62 95 75 90" fill="none" stroke="url(#blueGradient)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M 75 130 Q 65 133 62 122 L 62 112 Q 63 102 72 97" fill="none" stroke="#5b9fd8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
-                    <path d="M 70 125 Q 67 127 65 120 L 65 114 Q 66 107 70 104" fill="none" stroke="#a8d5ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
-                    <circle cx="58" cy="127" r="3" fill="#2c5aa0"/>
-                    <circle cx="77" cy="92" r="3" fill="#2c5aa0"/>
-                  </g>
-                  <g id="circuit-center">
-                    <path d="M 92 82 Q 108 80 110 100 Q 108 120 92 118 Q 76 120 74 100 Q 76 80 92 82" fill="none" stroke="#3d6bb8" stroke-width="2.5" opacity="0.9"/>
-                    <path d="M 95 85 Q 105 84 106 100 Q 105 116 95 115 Q 85 116 84 100 Q 85 84 95 85" fill="none" stroke="#5b9fd8" stroke-width="2" opacity="0.8"/>
-                    <path d="M 98 88 Q 102 87 103 100 Q 102 113 98 112 Q 94 113 93 100 Q 94 87 98 88" fill="none" stroke="#a8d5ff" stroke-width="1.5" opacity="0.6"/>
-                  </g>
-                  <rect x="94" y="94" width="12" height="12" fill="#d97706" rx="2" stroke="#b87a05" stroke-width="1"/>
-                  <rect x="96" y="96" width="6" height="6" fill="#f59e0b" opacity="0.7" rx="1"/>
-                  <g id="arrow">
-                    <path d="M 55 145 L 145 55" stroke="#8b6f47" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
-                    <path d="M 55 145 L 145 55" stroke="url(#copperGradient)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M 57 143 L 143 57" stroke="#f4d5a8" stroke-width="3.5" stroke-linecap="round" opacity="0.7"/>
-                    <polygon points="145,55 133,65 140,80" fill="url(#copperGradient)" stroke="#8b6f47" stroke-width="0.5" stroke-linejoin="round"/>
-                  </g>
-                  <circle cx="100" cy="100" r="85" fill="none" stroke="#c4b5a0" stroke-width="1" opacity="0.6"/>
-                  <circle cx="100" cy="100" r="95" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.3"/>
+                  <circle cx="100" cy="142" r="3" fill="#1f5fc0"/>
+                  <circle cx="118" cy="102" r="3" fill="#1f5fc0"/>
+                  <circle cx="82" cy="118" r="3" fill="#1f5fc0"/>
                 </svg>
                 <div class="logo-text">Business Plan - Stratify</div>
             </div>
