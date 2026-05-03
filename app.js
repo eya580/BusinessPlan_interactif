@@ -1792,6 +1792,9 @@ function exportPDF() {
             <script src="https://cdn.tailwindcss.com"><\/script>
             <style>
                 body { font-family: 'Times New Roman', serif; padding: 40px; }
+                .logo-header { display: flex; align-items: center; margin-bottom: 30px; border-bottom: 2px solid #d97706; padding-bottom: 20px; }
+                .logo-header img { width: 80px; height: auto; margin-right: 20px; }
+                .logo-text { font-size: 24px; font-weight: bold; color: #1f2937; }
                 h1 { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
                 h2 { font-size: 18px; font-weight: bold; margin-top: 20px; margin-bottom: 10px; }
                 p { margin-bottom: 10px; line-height: 1.6; }
@@ -1800,6 +1803,57 @@ function exportPDF() {
             </style>
         </head>
         <body>
+            <div class="logo-header">
+                <svg width="100" height="100" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                  <defs>
+                    <radialGradient id="copperGradient" cx="40%" cy="40%">
+                      <stop offset="0%" style="stop-color:#f4d5a8;stop-opacity:1" />
+                      <stop offset="50%" style="stop-color:#d4a574;stop-opacity:1" />
+                      <stop offset="100%" style="stop-color:#a87d3d;stop-opacity:1" />
+                    </radialGradient>
+                    <radialGradient id="innerCircle" cx="50%" cy="50%">
+                      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                      <stop offset="100%" style="stop-color:#f5f5f5;stop-opacity:1" />
+                    </radialGradient>
+                    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style="stop-color:#5b9fd8;stop-opacity:1" />
+                      <stop offset="100%" style="stop-color:#2c5aa0;stop-opacity:1" />
+                    </linearGradient>
+                  </defs>
+                  <circle cx="100" cy="100" r="95" fill="url(#copperGradient)" stroke="#8b6f47" stroke-width="2"/>
+                  <circle cx="100" cy="100" r="85" fill="url(#innerCircle)"/>
+                  <g id="circuit-right">
+                    <path d="M 120 65 Q 135 60 140 75 L 140 90 Q 138 105 125 110" fill="none" stroke="url(#blueGradient)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M 125 70 Q 135 67 138 78 L 138 88 Q 137 98 128 103" fill="none" stroke="#5b9fd8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+                    <path d="M 130 75 Q 133 73 135 80 L 135 86 Q 134 93 130 96" fill="none" stroke="#a8d5ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+                    <circle cx="142" cy="73" r="3" fill="#2c5aa0"/>
+                    <circle cx="123" cy="108" r="3" fill="#2c5aa0"/>
+                  </g>
+                  <g id="circuit-left">
+                    <path d="M 80 135 Q 65 140 60 125 L 60 110 Q 62 95 75 90" fill="none" stroke="url(#blueGradient)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M 75 130 Q 65 133 62 122 L 62 112 Q 63 102 72 97" fill="none" stroke="#5b9fd8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+                    <path d="M 70 125 Q 67 127 65 120 L 65 114 Q 66 107 70 104" fill="none" stroke="#a8d5ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+                    <circle cx="58" cy="127" r="3" fill="#2c5aa0"/>
+                    <circle cx="77" cy="92" r="3" fill="#2c5aa0"/>
+                  </g>
+                  <g id="circuit-center">
+                    <path d="M 92 82 Q 108 80 110 100 Q 108 120 92 118 Q 76 120 74 100 Q 76 80 92 82" fill="none" stroke="#3d6bb8" stroke-width="2.5" opacity="0.9"/>
+                    <path d="M 95 85 Q 105 84 106 100 Q 105 116 95 115 Q 85 116 84 100 Q 85 84 95 85" fill="none" stroke="#5b9fd8" stroke-width="2" opacity="0.8"/>
+                    <path d="M 98 88 Q 102 87 103 100 Q 102 113 98 112 Q 94 113 93 100 Q 94 87 98 88" fill="none" stroke="#a8d5ff" stroke-width="1.5" opacity="0.6"/>
+                  </g>
+                  <rect x="94" y="94" width="12" height="12" fill="#d97706" rx="2" stroke="#b87a05" stroke-width="1"/>
+                  <rect x="96" y="96" width="6" height="6" fill="#f59e0b" opacity="0.7" rx="1"/>
+                  <g id="arrow">
+                    <path d="M 55 145 L 145 55" stroke="#8b6f47" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+                    <path d="M 55 145 L 145 55" stroke="url(#copperGradient)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M 57 143 L 143 57" stroke="#f4d5a8" stroke-width="3.5" stroke-linecap="round" opacity="0.7"/>
+                    <polygon points="145,55 133,65 140,80" fill="url(#copperGradient)" stroke="#8b6f47" stroke-width="0.5" stroke-linejoin="round"/>
+                  </g>
+                  <circle cx="100" cy="100" r="85" fill="none" stroke="#c4b5a0" stroke-width="1" opacity="0.6"/>
+                  <circle cx="100" cy="100" r="95" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.3"/>
+                </svg>
+                <div class="logo-text">Business Plan - Stratify</div>
+            </div>
             ${content}
         </body>
         </html>
@@ -1810,7 +1864,9 @@ function exportPDF() {
 
 function exportWord() {
     const content = (document.getElementById('bp-final-content').innerText || document.getElementById('bp-preview').innerText);
-    const blob = new Blob(['\ufeff', content], {
+    const header = `STRATIFY - INTERACTIVE FEASIBILITY & BUSINESS PLANS\n${'='.repeat(60)}\nBusiness Plan Document\n${'='.repeat(60)}\n\n`;
+    const fullContent = header + content;
+    const blob = new Blob(['\ufeff', fullContent], {
         type: 'application/msword'
     });
     const url = URL.createObjectURL(blob);

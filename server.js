@@ -110,6 +110,10 @@ app.post('/api/auth/register', async (req, res) => {
             return res.status(400).json({ message: 'Tous les champs sont requis.' });
         }
 
+        if (password.length < 6) {
+            return res.status(400).json({ message: 'Le mot de passe doit contenir au moins 6 caracteres.' });
+        }
+
         const existingUser = await User.findOne({ email: normalizedEmail });
         if (existingUser) {
             return res.status(409).json({ message: 'Cet email est deja utilise.' });
@@ -120,6 +124,12 @@ app.post('/api/auth/register', async (req, res) => {
         return res.status(201).json(toPublicUser(user));
     } catch (error) {
         console.error('Register error:', error);
+        if (error.code === 11000) {
+            return res.status(409).json({ message: 'Cet email est deja utilise.' });
+        }
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({ message: 'Donnees invalides.' });
+        }
         return res.status(500).json({ message: 'Erreur serveur lors de l inscription.' });
     }
 });
@@ -132,8 +142,17 @@ app.post('/api/auth/login', async (req, res) => {
             return res.status(400).json({ message: 'Email et mot de passe requis.' });
         }
 
+        if (!normalizedEmail.includes('@')) {
+            return res.status(400).json({ message: 'Email invalide.' });
+        }
+
         const user = await User.findOne({ email: normalizedEmail });
-        if (!user || !(await bcrypt.compare(password, user.password))) {
+        if (!user) {
+            return res.status(401).json({ message: 'Email ou mot de passe incorrect.' });
+        }
+
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) {
             return res.status(401).json({ message: 'Email ou mot de passe incorrect.' });
         }
 
