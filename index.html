@@ -28,37 +28,52 @@
         .dashboard-img { background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%); }
         
         /* Premium Knight Logo Styling */
-        .knight-logo {
+        .logo-wrapper {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-            border-radius: 8px;
-            padding: 4px 8px;
-            border: 2px solid #d4af37;
-            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
-            transition: all 0.3s ease;
+            width: 180px;
+            height: 180px;
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 12px;
+            border: 1px solid rgba(209, 115, 6, 0.18);
         }
-        
-        .knight-logo:hover {
+
+        .logo-wrapper-small {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 72px;
+            height: 72px;
+            background: #ffffff;
+            border-radius: 18px;
+            border: 1px solid rgba(209, 115, 6, 0.18);
+        }
+
+        .logo {
+            position: relative;
+            font-size: 120px;
+            color: #111111;
+            line-height: 1;
+        }
+
+        .logo::after {
+            content: "\f441";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #D4AF37;
             transform: scale(1.05);
-            box-shadow: 0 6px 16px rgba(212, 175, 55, 0.3);
+            opacity: 0.9;
         }
-        
-        .knight-logo i {
-            color: #d4af37;
-            font-size: inherit;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+        .logo-small {
+            font-size: 42px;
         }
-        
-        .knight-logo-lg {
-            font-size: 48px;
-        }
-        
-        .knight-logo-sm {
-            font-size: 24px;
-        }
-        
+
         .logo-section {
             display: flex;
             align-items: center;
@@ -87,8 +102,8 @@
         <div class="max-w-md w-full mx-4">
             <div class="text-center mb-8">
                 <div class="flex items-center justify-center mb-4">
-                    <div class="knight-logo knight-logo-lg">
-                        <i class="fas fa-chess-knight"></i>
+                    <div class="logo-wrapper">
+                        <i class="fa-solid fa-chess-knight logo" aria-hidden="true"></i>
                     </div>
                 </div>
                 <h1 class="text-2xl font-bold text-gray-900 mb-1">Stratify</h1>
@@ -153,8 +168,8 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
                 <div class="logo-section">
-                    <div class="knight-logo knight-logo-sm">
-                        <i class="fas fa-chess-knight"></i>
+                    <div class="logo-wrapper-small" aria-hidden="true">
+                        <i class="fa-solid fa-chess-knight logo logo-small" aria-hidden="true"></i>
                     </div>
                     <div class="logo-text-wrapper">
                         <h1>Stratify</h1>
