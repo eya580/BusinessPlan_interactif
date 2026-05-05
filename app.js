@@ -8,6 +8,7 @@ const API_BASE_URL = window.location.origin.startsWith('http')
     ? `${window.location.origin}/api`
     : 'http://localhost:5000/api';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 // Localization Configuration
 const LOCALE_CONFIG = {
     country: 'Tunisie',
