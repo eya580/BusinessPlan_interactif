@@ -911,7 +911,7 @@ function displayLocationRating() {
         return;
     }
 
-    const stars = Math.round(rating.rating);
+    const stars = Math.round((rating.rating / 10) * 5);
     const starHtml = '★'.repeat(stars) + '☆'.repeat(5 - stars);
 
     ratingContainer.innerHTML = `
