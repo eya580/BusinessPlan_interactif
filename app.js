@@ -4,11 +4,10 @@ let currentProject = null;
 let cashflowChart = null;
 let currentUser = null;
 let currentStep = 1;
-const API_BASE_URL = window.location.origin.startsWith('http')
-    ? `${window.location.origin}/api`
-    : 'http://localhost:5000/api';
+const API_BASE_URL = window.location.protocol === 'file:'
+    ? 'http://localhost:5000/api'
+    : `${window.location.origin}/api`;
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
 // Localization Configuration
 const LOCALE_CONFIG = {
     country: 'Tunisie',
@@ -500,7 +499,14 @@ document.addEventListener('DOMContentLoaded', async function() {
 async function loadCurrentUser() {
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) {
-        currentUser = JSON.parse(savedUser);
+        try {
+            const parsedUser = JSON.parse(savedUser);
+            if (parsedUser.id && parsedUser.email && parsedUser.name) {
+                currentUser = parsedUser;
+            }
+        } catch (error) {
+            console.warn('Error parsing user data from localStorage, ignoring...');
+        }
     }
 }
 
@@ -519,11 +525,24 @@ function checkAuth() {
         sectionAuth.classList.add('hidden');
         mainNav.classList.remove('hidden');
         mainContent.classList.remove('hidden');
+        updateWelcomeMessage();
         showSection('dashboard');
+        // Load projects in background - if token is invalid, it will fail and logout
+        loadProjects().catch(error => {
+            console.warn('Failed to load projects, token may be invalid:', error);
+            // Don't logout immediately, let the user try to navigate
+        });
     } else {
         sectionAuth.classList.remove('hidden');
         mainNav.classList.add('hidden');
         mainContent.classList.add('hidden');
+    }
+}
+
+function updateWelcomeMessage() {
+    const welcomeElement = document.getElementById('welcome-message');
+    if (welcomeElement && currentUser) {
+        welcomeElement.textContent = `Bienvenue, ${currentUser.name} ! Vue d'ensemble de vos projets et analyses`;
     }
 }
 
@@ -567,11 +586,11 @@ function showAuthTab(tab) {
 
 async function login(email, password) {
     try {
-        const user = await apiRequest('/auth/login', {
+        const response = await apiRequest('/auth/login', {
             method: 'POST',
             body: JSON.stringify({ email: email.trim(), password })
         });
-        currentUser = user;
+        currentUser = response;
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
         checkAuth();
         await loadProjects();
@@ -586,11 +605,11 @@ async function login(email, password) {
 
 async function register(name, email, password) {
     try {
-        const newUser = await apiRequest('/auth/register', {
+        const response = await apiRequest('/auth/register', {
             method: 'POST',
             body: JSON.stringify({ name: name.trim(), email: email.trim(), password })
         });
-        currentUser = newUser;
+        currentUser = response;
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
         checkAuth();
         await loadProjects();
@@ -1274,6 +1293,11 @@ async function generateFinalAnalysis() {
     document.getElementById('swot-threats').innerHTML = swot.threats.map(t => `<li>${t}</li>`).join('');
     
     // Save project
+    if (!currentUser || !currentUser.id) {
+        alert('Vous devez être connecté pour enregistrer un projet.');
+        return;
+    }
+
     currentProject = {
         userId: currentUser.id,
         name: projectName,
